@@ -1,17 +1,16 @@
 package com.jcmlabs;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import com.jcmlabs.engine.core.EventProcessor;
+import com.jcmlabs.engine.core.LoggingEventProcessor;
+import com.jcmlabs.engine.ingestion.EventSource;
+import com.jcmlabs.engine.ingestion.RandomEventSource;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        EventProcessor eventProcessor = new LoggingEventProcessor();
+        EventSource eventSource = new RandomEventSource();
+
+        eventSource.start(eventProcessor::process);
     }
 }
