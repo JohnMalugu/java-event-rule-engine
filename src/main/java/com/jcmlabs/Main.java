@@ -15,34 +15,35 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Rule rule = new Rule(
-                "Poor Network Quality",
-                new LatencyAndLossCondition(),
-                new AlertAction()
-        );
 
-        EventQueue queue = new EventQueue(10_000);
+        //Define rules
+        Rule rule = new Rule("Poor Network Quality", new LatencyAndLossCondition(), new AlertAction());
+
         RuleEngine ruleEngine = new RuleEngine(List.of(rule));
 
+        //Create processor
         EventProcessor eventProcessor = new LoggingEventProcessor(ruleEngine);
 
+        //Create queue(backpressure)
+        EventQueue queue = new EventQueue(10_000);
+
+        //Start workers
         int workers = Runtime.getRuntime().availableProcessors();
 
-        for(int i = 0; i < workers; i++){
-            Thread worker = new Thread(new Worker(queue,eventProcessor));
+        for (int i = 0; i < workers; i++) {
+            Thread worker = new Thread(new Worker(queue, eventProcessor));
             worker.start();
         }
 
+        //Start event source
         EventSource source = new RandomEventSource();
-
         source.start(event -> {
-
+            try {
+                queue.publish(event);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         });
-
-
-
-
-        EventProcessor processor = new LoggingEventProcessor(ruleEngine);
-
     }
+
 }
