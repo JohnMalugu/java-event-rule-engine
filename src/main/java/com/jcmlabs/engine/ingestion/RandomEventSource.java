@@ -20,7 +20,10 @@ public class RandomEventSource implements EventSource {
                     UUID.randomUUID(),
                     "NETWORK_METRIC",
                     Instant.now(),
-                    Map.of("latency", random.nextInt(300), "packetLoss", random.nextDouble()));
+                    Map.of(
+                            "latency", random.nextInt(300),
+                            "packetLoss", random.nextDouble()
+                    ));
 
             eventConsumer.accept(event);
 
