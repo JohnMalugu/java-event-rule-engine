@@ -18,7 +18,8 @@ public class RandomEventSource implements EventSource {
         while (running) {
             Event event = new Event(
                     UUID.randomUUID(),
-                    "NETWORK_METRIC", Instant.now(), Map.of("latency", random.nextInt(300), "packetLoss", random.nextDouble()));
+                    "NETWORK_METRIC",
+                    Instant.now(), Map.of("latency", random.nextInt(300), "packetLoss", random.nextDouble()));
 
             eventConsumer.accept(event);
 
