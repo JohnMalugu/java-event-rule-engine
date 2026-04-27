@@ -9,6 +9,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 
 public class RandomEventSource implements EventSource {
+
     private final Random random = new Random();
     private volatile boolean running = true;
 
