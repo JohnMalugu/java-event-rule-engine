@@ -4,4 +4,7 @@ public record Rule(
         String name,
         Condition condition,
         Action action
+
+//add more if required 
+//validation required 
 ) {}
