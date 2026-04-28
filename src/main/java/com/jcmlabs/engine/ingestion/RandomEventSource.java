@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.Consumer;
 
+@Slf4j
 public class RandomEventSource implements EventSource {
 
     private final Random random = new Random();
