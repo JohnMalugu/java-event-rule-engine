@@ -36,7 +36,7 @@ public class RandomEventSource implements EventSource {
             }
         }
     }
-//
+
     public void stop() {
         running = false;
     }
