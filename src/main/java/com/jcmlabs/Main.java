@@ -30,6 +30,7 @@ public class Main {
         //Start workers
         int workers = Runtime.getRuntime().availableProcessors();
 
+        //simpre looping
         for (int i = 0; i < workers; i++) {
             Thread worker = new Thread(new Worker(queue, eventProcessor));
             worker.start();
