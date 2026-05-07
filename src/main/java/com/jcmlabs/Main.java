@@ -35,6 +35,7 @@ public class Main {
             worker.start();
         }
 
+
         //Start event source
         EventSource source = new RandomEventSource();
         source.start(event -> {
