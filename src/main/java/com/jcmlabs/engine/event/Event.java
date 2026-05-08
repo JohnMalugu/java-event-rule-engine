@@ -9,4 +9,4 @@ public record Event(
     String type,
     Instant timestamp,
     Map<String, Object> attributes
-) { }
+) {}
