@@ -6,6 +6,7 @@ public class LatencyAndLossCondition implements Condition{
 
     @Override
     public boolean evaluate(Event event) {
+
         Object latencyObj = event.attributes().get("latency");
         Object lossObj = event.attributes().get("packetLoss");
 
